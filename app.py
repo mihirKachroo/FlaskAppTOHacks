@@ -14,8 +14,7 @@ def predict():
 
     if data == "percentageOfMoneyGraph":
         filename = mainModel.percentageOfMoneyGraph(data)
-    elif data == "amountSpentDaily":
-        filename = mainModel.amountSpentDaily(data)
+    
     elif data == "dailyExpenses":
         filename = mainModel.dailyExpenses(data)
     elif data == "predictExpenses":

@@ -105,36 +105,6 @@ def dailyExpenses(sentence_text):
     pic_hash = base64.b64encode(pic_IObytes.read())
     return str(pic_hash)
 
-def amountSpentDaily(sentence_text):
-    all_categories = tuple(set(df['category']) - set('travel'))
-    cities_daily = []
-    for city, rows in df.groupby(['city']):
-        days = set(rows['date'].values)
-        days = (max(days) - min(days)).days + 1
-        descs = {desc: sum(rs['eur'].values)/days for desc, rs in rows[rows['category'] != 'travel'].groupby(['category'])}
-        cities_daily.append((city, tuple(descs[i] if i in descs else 0 for i in all_categories)))
-
-    cities, sums = zip(*sorted(cities_daily, reverse=True, key=lambda t: sum(t[1])))
-    sums = list(zip(*sums))
-
-    ind = np.arange(len(cities))
-    width = 0.35
-    colors = ['maroon','c','orange','k','b','darkmagenta','g','m','yellow','r','peru','navy','cyan','plum','grey','teal','lime']
-    bars = [plt.bar(ind, sums[0], width, color=colors[0])]
-    for i in range(1, len(all_categories)):
-        bars.append(plt.bar(ind, sums[i], width, bottom=list(map(sum, zip(*sums[:i]))), color=colors[i]))
-
-    plt.title('amount of money spent daily per city')
-    plt.xticks(ind, cities)
-    plt.yticks(np.arange(0, 26, 1))
-    plt.legend(list(zip(*bars))[0], all_categories)
-        
-    pic_IObytes = io.BytesIO()
-    plt.savefig(pic_IObytes,  format='png')
-    pic_IObytes.seek(0)
-    pic_hash = base64.b64encode(pic_IObytes.read())
-    return str(pic_hash)
-
 def predictExpenses(sentence_text):
     daily_expenses = []
     all_dates = list(pd.date_range(min(df['date']), max(df['date']), freq='D'))
