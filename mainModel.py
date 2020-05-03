@@ -96,9 +96,9 @@ def dailyExpenses(sentence_text):
     ind = np.arange(len(all_dates))
     plt.bar(ind, sums, color='red', width=0.35)
     plt.xticks(ind, list(range(len(all_dates))))
-    plt.title('daily amount of money spend')
-    plt.xlabel('day number')
-    plt.ylabel('amount of money in eur')
+    plt.title('Daily Amount of Money Spent')
+    plt.xlabel('Day Number')
+    plt.ylabel('Amount of Money ($)')
     pic_IObytes = io.BytesIO()
     plt.savefig(pic_IObytes,  format='png')
     pic_IObytes.seek(0)
@@ -124,7 +124,7 @@ def amountSpentDaily(sentence_text):
     for i in range(1, len(all_categories)):
         bars.append(plt.bar(ind, sums[i], width, bottom=list(map(sum, zip(*sums[:i]))), color=colors[i]))
 
-    plt.title('amount of money spent daily per city')
+    plt.title('Amount of Money Spent Daily Per City')
     plt.xticks(ind, cities)
     plt.yticks(np.arange(0, 26, 1))
     plt.legend(list(zip(*bars))[0], all_categories)
@@ -191,8 +191,8 @@ def predictExpenses(sentence_text):
     plt.plot(ytest, color = 'green')
     plt.plot(ypred, color = 'navy')
     plt.plot(ypredopt, color = 'red')
-    plt.ylabel('predicted value in eur')
-    plt.xlabel('days in the test set')
+    plt.ylabel('Predicted Value ($)')
+    plt.xlabel('Number of Days In')
 
     pic_IObytes = io.BytesIO()
     plt.savefig(pic_IObytes,  format='png')
