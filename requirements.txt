@@ -6,6 +6,9 @@ cytoolz==0.10.1
 dask==2.15.0
 decorator==4.4.2
 Flask==1.1.2
+Flask-SQLAlchemy==2.4.0
+gunicorn==19.9.0
+requests==2.22.0
 imageio==2.8.0
 itsdangerous==1.1.0
 Jinja2==2.11.1
